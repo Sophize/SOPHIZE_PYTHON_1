@@ -21,4 +21,4 @@ def test_index():
 
     r = client.get('/')
     assert r.status_code == 200
-    assert 'Hello World' in r.data.decode('utf-8')
+    assert 'Hello from SOPHIZE_PYTHON_1!' in r.data.decode('utf-8')

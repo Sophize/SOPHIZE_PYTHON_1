@@ -1,2 +1,2 @@
 Flask==1.1.2
-sophize-datamodel==0.2
+sophize-datamodel==0.2.1
