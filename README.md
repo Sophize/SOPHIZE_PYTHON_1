@@ -8,12 +8,13 @@ See https://cloud.google.com/appengine/docs/standard/python3/building-app/writin
 ```
 python -m venv env
 source env/bin/activate
-pip install  -r requirements.txt
+pip install  -r app/requirements.txt
 python app/main.py
 ```
 
 ## Deploy
 
 ```
-./app/deploy.sh
+cd app
+./deploy.sh
 ```

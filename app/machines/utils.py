@@ -41,7 +41,7 @@ def string_to_argument(arg_id: str) -> Argument:
             'language': Language.INFORMAL,
             'conclusion': conclusion,
             'premiseMachine': premise_machine,
-            'ephemeralId': ephemeral_id
+            'ephemeralPtr': '#A~' + ephemeral_id
         })
     else:
         props = arg_id.split('-')
@@ -50,7 +50,7 @@ def string_to_argument(arg_id: str) -> Argument:
             'language': Language.INFORMAL,
             'conclusion': props[0],
             'premises': props[1:],
-            'ephemeralId': ephemeral_id
+            'ephemeralPtr': '#A~' + ephemeral_id
         })
 
 
@@ -99,5 +99,5 @@ def string_to_proposition(prop_id: str) -> Proposition:
         'maetaLanguage': MetaLanguage.INFORMAL,
         'language': Language.INFORMAL,
         'statement': statement,
-        'ephemeralId': prop_id
+        'ephemeralPtr': '#P~' + prop_id
     })
