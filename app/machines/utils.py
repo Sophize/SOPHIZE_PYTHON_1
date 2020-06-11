@@ -39,7 +39,7 @@ def string_to_argument(arg_id: str) -> Argument:
         return Argument.from_dict({
             'metaLanguage': MetaLanguage.INFORMAL,
             'language': Language.INFORMAL,
-            'conclusion': conclusion,
+            'conclusion': '#P~' + conclusion,
             'premiseMachine': premise_machine,
             'ephemeralPtr': '#A~' + ephemeral_id
         })
@@ -48,8 +48,8 @@ def string_to_argument(arg_id: str) -> Argument:
         return Argument.from_dict({
             'metaLanguage': MetaLanguage.INFORMAL,
             'language': Language.INFORMAL,
-            'conclusion': props[0],
-            'premises': props[1:],
+            'conclusion': '#P~' + props[0],
+            'premises': ['#P~'+s for s in props[1:]],
             'ephemeralPtr': '#A~' + ephemeral_id
         })
 
