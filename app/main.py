@@ -6,7 +6,7 @@
 import json
 
 from flask import Flask, request
-from sophize_datamodel import MachineRequest, MachineResponse, remove_nulls
+from sophize_datamodel import ProofRequest, ProofResponse, remove_nulls
 
 from machines import num_schema, sum_machine
 import machines_managed
@@ -22,10 +22,10 @@ def hello():
     return 'Hello from SOPHIZE_PYTHON_1!'
 
 
-@app.route('/machine_request', methods=['POST'])
-def handle_machine_request():
+@app.route('/proof_request', methods=['POST'])
+def handle_proof_request():
     """Endpoint to handle machine requests from Sophize."""
-    machine_request = MachineRequest.from_dict(json.loads(request.data))
+    machine_request = ProofRequest.from_dict(json.loads(request.data))
     # print(machine_request.to_dict())
     if machine_request.machine_ptr == machines_managed.NUMBER_MACHINE:
         response = num_schema.get_response(machine_request)
@@ -33,7 +33,7 @@ def handle_machine_request():
         response = sum_machine.get_response(machine_request)
     else:
         return 'unknown machine', 400
-    if isinstance(response, MachineResponse):
+    if isinstance(response, ProofResponse):
         return remove_nulls(response.to_dict())
     return response
 

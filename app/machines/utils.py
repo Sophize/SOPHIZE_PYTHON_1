@@ -1,12 +1,12 @@
 import re
 
-from sophize_datamodel import (Argument, Language, MachineResponse,
+from sophize_datamodel import (Argument, Language, ProofResponse,
                                MetaLanguage, Proposition, TruthValue)
 
-DONT_KNOW_RESPONSE = MachineResponse.from_dict(
+DONT_KNOW_RESPONSE = ProofResponse.from_dict(
     {'truthValue': TruthValue.UNKNOWN})
-TRUE_STUB_RESPONSE = MachineResponse.from_dict({'truthValue': TruthValue.TRUE})
-FALSE_STUB_RESPONSE = MachineResponse.from_dict(
+TRUE_STUB_RESPONSE = ProofResponse.from_dict({'truthValue': TruthValue.TRUE})
+FALSE_STUB_RESPONSE = ProofResponse.from_dict(
     {'truthValue': TruthValue.FALSE})
 ID4_SCHEMA = re.compile(r'^\w+\.(\d+)\.(\d+).(\d+).(\d+)$')
 

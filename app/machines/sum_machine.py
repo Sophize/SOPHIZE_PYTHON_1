@@ -18,7 +18,7 @@ import re
 from dataclasses import dataclass
 from typing import List
 
-from sophize_datamodel import Argument, Language, MachineRequest, Proposition
+from sophize_datamodel import Argument, Language, ProofRequest, Proposition
 
 from machines_managed import NUMBER_MACHINE
 
@@ -77,14 +77,13 @@ def _combine_proofs(proofs: List[Proof]) -> Proof:
     return Proof(None, combined_propositions, combined_arguments)
 
 
-def get_response(req: MachineRequest):
+def get_response(req: ProofRequest):
     """Respond to machine request for this machine."""
     proposition = req.proposition
     if proposition.language is not Language.INFORMAL:
         return DONT_KNOW_RESPONSE
     statement = proposition.statement
-    structure = _get_statement_structure(
-        statement, req.try_completing_proposition)
+    structure = _get_statement_structure(statement, req.parse_lenient)
 
     if structure is None:
         return DONT_KNOW_RESPONSE
@@ -105,7 +104,7 @@ def get_response(req: MachineRequest):
     return response
 
 
-def _get_statement_structure(statement: str, try_completing_proposition: bool):
+def _get_statement_structure(statement: str, parse_lenient: bool):
     matcher = SUM_SCHEMA.match(statement)
     if matcher is not None:
         return [string_to_int(matcher.group(1)),
@@ -120,7 +119,7 @@ def _get_statement_structure(statement: str, try_completing_proposition: bool):
                 string_to_int(matcher.group(1)),
                 True]
 
-    if not try_completing_proposition:
+    if not parse_lenient:
         return None
 
     matcher = SUM_SCHEMA_INCOMPLETE.match(statement)

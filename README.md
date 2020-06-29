@@ -9,7 +9,7 @@ See https://cloud.google.com/appengine/docs/standard/python3/building-app/writin
 python -m venv env
 source env/bin/activate
 pip install  -r app/requirements.txt
-python app/main.py
+cd app && python main.py
 ```
 
 ## Deploy
